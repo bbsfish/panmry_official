@@ -16,7 +16,7 @@ header {
         height: 50px;
         background-color: var(--h-nav-bg);
         position: fixed;
-        transition: .9s ease;
+        transition: .4s ease;
     }
 
     .h-nav-list-active {
@@ -113,7 +113,7 @@ header {
         justify-content: center;
         align-items: center;
         background-color: rgba(0, 0, 0, .2);
-        transition: .9s ease;
+        transition: .5s ease;
     }
 
     #barger-menu-btn span,

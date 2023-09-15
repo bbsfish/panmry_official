@@ -14,6 +14,7 @@ window.addEventListener('DOMContentLoaded', function () {
             hideHeaderWhenScroll();
             checkHeaderNavListActive();
             toggleHeaderNavListActive();
+            observer.observe(document.getElementById('body-header'));
         });
 });
 
@@ -119,6 +120,7 @@ const bargerMenuAnimation = function () {
     };
 }
 
+// Scroll発生時、ヘッダーナビゲーションの表示／非表示切り替え
 const hideHeaderWhenScroll = function () {
     const header = document.querySelectorAll(".header-nav")[0];
     const bgBtn = document.getElementById("barger-menu-btn");
@@ -139,6 +141,22 @@ const hideHeaderWhenScroll = function () {
     });
 }
 
+
+// Intersection Observer API : entriesにviewportが交わったとき、コールバック関数を実行する
+// 対象が表示されたとき、ヘッダーナビゲーションを強制表示する
+const observer = new IntersectionObserver((entries) => {
+    const header = document.querySelectorAll(".header-nav")[0];
+    const bgBtn = document.getElementById("barger-menu-btn");
+    // entries: 監視対象すべてが入っているリスト  
+    for (const e of entries) {
+        if (e.isIntersecting) {
+            // viewport に交差し、入ったとき
+            header.style = "position: fixed; top: 0;"; // headerを再表示
+            bgBtn.style = "position: fixed; top: 4px; right: 10px;"; // headerを再表示
+        }
+    }
+});
+ 
 // h-link-pc/h-link-sp すべてから class=h-nav-list-active を除去
 const headerNavListReset = function () {
     document.querySelectorAll(".h-link-pc").forEach((pclink) => {
